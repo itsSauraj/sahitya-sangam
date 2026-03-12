@@ -36,18 +36,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mail = new PHPMailer(true);
 
     try {
+        // Load environment variables
+        require_once __DIR__ . '/../config/env.php';
+        
         // Server settings
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
+        $mail->Host = env('MAIL_HOST', 'smtp.gmail.com');
         $mail->SMTPAuth = true;
-        $mail->Username = 'sahityasangamnjk@gmail.com';
-        $mail->Password = 'qmsg ejnc czvj pihc'; // Your Gmail app password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = 587;
+        $mail->Username = env('MAIL_USERNAME');
+        $mail->Password = env('MAIL_PASSWORD');
+        $mail->SMTPSecure = env('MAIL_ENCRYPTION', 'tls') === 'tls' 
+            ? PHPMailer::ENCRYPTION_STARTTLS 
+            : PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port = env('MAIL_PORT', 587);
 
         // Recipients
-        $mail->setFrom('sahityasangamnjk@gmail.com', 'Sahitya Sangam Contact');
-        $mail->addAddress('sahityasangamnjk@gmail.com', 'Sahitya Sangam');
+        $mail->setFrom(
+            env('MAIL_FROM_ADDRESS'), 
+            env('MAIL_FROM_NAME', 'Sahitya Sangam Contact')
+        );
+        $mail->addAddress(
+            env('MAIL_USERNAME'), 
+            env('MAIL_FROM_NAME', 'Sahitya Sangam')
+        );
 
         // Content
         $mail->isHTML(false);

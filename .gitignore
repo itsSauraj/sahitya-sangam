@@ -8,6 +8,14 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Environment Configuration (contains sensitive credentials)
+.env
+.env.local
+.env.*.local
+
+# Database Configuration (legacy - now using .env)
+includes/config/db.php.backup
+
 # PHPMailer (should be managed via Composer)
 PHPMailer-master/
 PHPMailer.zip
@@ -45,9 +53,15 @@ desktop.ini
 
 # Logs and databases
 *.log
-*.sql
 *.sqlite
 *.db
+
+# Database dumps and backups (but keep migration files!)
+*.sql.gz
+*.sql.zip
+backup*.sql
+dump*.sql
+database/backups/
 
 # Session files
 sessions/

@@ -6,19 +6,30 @@ require '../../vendor/phpmailer/src/Exception.php';
 require '../../vendor/phpmailer/src/PHPMailer.php';
 require '../../vendor/phpmailer/src/SMTP.php';
 
+// Load environment variables
+require_once __DIR__ . '/../config/env.php';
+
 $mail = new PHPMailer(true);
 
 try {
     $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';
+    $mail->Host = env('MAIL_HOST', 'smtp.gmail.com');
     $mail->SMTPAuth = true;
-    $mail->Username = '22amtics289@gmail.com';
-    $mail->Password = 'fzphyppgclozkzan';
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port = 587;
+    $mail->Username = env('MAIL_USERNAME');
+    $mail->Password = env('MAIL_PASSWORD');
+    $mail->SMTPSecure = env('MAIL_ENCRYPTION', 'tls') === 'tls' 
+        ? PHPMailer::ENCRYPTION_STARTTLS 
+        : PHPMailer::ENCRYPTION_SMTPS;
+    $mail->Port = env('MAIL_PORT', 587);
 
-    $mail->setFrom('22amtics289@gmail.com', 'Test');
-    $mail->addAddress('22amtics289@gmail.com', 'Test Recipient');
+    $mail->setFrom(
+        env('MAIL_FROM_ADDRESS'), 
+        env('MAIL_FROM_NAME', 'Test')
+    );
+    $mail->addAddress(
+        env('MAIL_USERNAME'), 
+        'Test Recipient'
+    );
 
     $mail->isHTML(false);
     $mail->Subject = 'Test Email from PHPMailer';
