@@ -8,14 +8,13 @@ database/
 ├── migrate.php                                    # Migration runner (269 lines)
 ├── seed.php                                       # Database seeder with sample data
 ├── MIGRATIONS.md                                  # Complete migration guide
-├── migrations/                                    # SQL migration files
-│   ├── 20260312000001_create_users_table.sql
-│   ├── 20260312000002_create_books_table.sql
-│   ├── 20260312000003_create_orders_table.sql
-│   ├── 20260312000004_create_order_items_table.sql
-│   ├── 20260312000005_create_authors_table.sql
-│   └── 20260312000006_create_contact_messages_table.sql
-└── seeds/                                         # Optional seed data directory
+└── migrations/                                    # SQL migration files
+    ├── 20260312000001_create_users_table.sql
+    ├── 20260312000002_create_books_table.sql
+    ├── 20260312000003_create_orders_table.sql
+    ├── 20260312000004_create_order_items_table.sql
+    ├── 20260312000005_create_authors_table.sql
+    └── 20260312000006_create_contact_messages_table.sql
 ```
 
 ## 🎯 Migration System Features

@@ -77,21 +77,11 @@ Sahitya_Sangam2/
 │       ├── language/
 │       └── ...
 │
-├── 📁 assets/              # Static resources (for future use)
-│   ├── css/                # Stylesheets
-│   ├── js/                 # JavaScript files
-│   └── images/             # Image assets
-│
-├── 📁 scripts/             # Utility scripts
-│   └── read_excel.py       # Python Excel reader
-│
 ├── 📁 database/            # Database migrations & seeds
 │   ├── migrate.php         # Migration runner
 │   ├── seed.php            # Database seeder
 │   ├── MIGRATIONS.md       # Migration guide
 │   └── migrations/         # SQL migration files
-│
-├── 📁 .venv/               # Python virtual environment
 │
 ├── .gitignore              # Git ignore rules
 └── README.md               # This file
@@ -119,7 +109,6 @@ Sahitya_Sangam2/
 
 ### Development Tools
 - **XAMPP** - Local development environment
-- **Python 3.x** - Utility scripts
 - **Git** - Version control
 - **VS Code** - Recommended editor
 
@@ -146,7 +135,6 @@ Sahitya_Sangam2/
 ### Prerequisites
 
 1. **XAMPP** installed (Apache + MySQL)
-2. **Python 3.x** (for utility scripts)
 
 ### Installation
 
@@ -204,15 +192,6 @@ Sahitya_Sangam2/
 
 5. **Access Application**
    - Navigate to: `http://localhost/Sahitya_Sangam2/`
-
-6. **Python Environment** (Optional)
-   ```powershell
-   # Activate virtual environment
-   .\.venv\Scripts\Activate.ps1
-   
-   # Install dependencies if needed
-   pip install -r requirements.txt
-   ```
 
 ## Email Configuration
 
@@ -279,12 +258,6 @@ All user-facing pages are in the root directory for easy access.
 Third-party libraries follow PSR-4 standards:
 - PHPMailer for email functionality
 
-### Assets Directory
-Ready for:
-- Custom CSS stylesheets
-- JavaScript files
-- Image uploads and static images
-
 ## Security Considerations
 
 ⚠️ **Important Security Notes**:
@@ -312,16 +285,6 @@ C:\xampp\php\php.exe database/migrate.php status
 C:\xampp\php\php.exe database/migrate.php up
 
 # 5. Start coding!
-```
-
-### Python Environment (Optional)
-
-```powershell
-# Activate virtual environment
-.\.venv\Scripts\Activate.ps1
-
-# Install dependencies
-pip install -r requirements.txt
 ```
 
 ### Access Application
