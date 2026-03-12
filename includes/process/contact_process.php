@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once __DIR__ . '/../config/init.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -36,9 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mail = new PHPMailer(true);
 
     try {
-        // Load environment variables
-        require_once __DIR__ . '/../config/env.php';
-        
         // Server settings
         $mail->isSMTP();
         $mail->Host = env('MAIL_HOST', 'smtp.gmail.com');

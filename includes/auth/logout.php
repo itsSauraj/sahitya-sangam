@@ -1,9 +1,10 @@
 <?php
-session_start();
+require_once __DIR__ . '/../config/init.php';
+
 session_unset();
 session_destroy();
 
-/* 👇 ROOT INDEX pe redirect */
-header("Location: ../index.php");
+/* Redirect to homepage */
+header("Location: ../../index.php");
 exit();
 ?>

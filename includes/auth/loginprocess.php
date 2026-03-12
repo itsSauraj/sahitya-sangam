@@ -1,6 +1,5 @@
 <?php
-session_start();
-include "../config/db.php";
+require_once __DIR__ . '/../config/init.php';
 
 $email = $_POST['email'];
 $password = $_POST['password'];

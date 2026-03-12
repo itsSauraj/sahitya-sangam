@@ -25,7 +25,8 @@ C:\xampp\php\php.exe database/seed.php
 http://localhost/Sahitya_Sangam2/
 ```
 
-📖 **Environment Setup**: See [ENV_SETUP.md](ENV_SETUP.md) for detailed .env configuration
+📖 **Environment Setup**: See [ENV_SETUP.md](ENV_SETUP.md) for detailed .env configuration  
+🔧 **Init Pattern**: See [INIT_PATTERN.md](INIT_PATTERN.md) for centralized initialization
 
 ## 📋 Table of Contents
 
@@ -35,6 +36,8 @@ http://localhost/Sahitya_Sangam2/
 - [Setup Instructions](#setup-instructions)
 - [Database Migrations](#database-migrations)
 - [Email Configuration](#email-configuration)
+- [Centralized Initialization Pattern](#centralized-initialization-pattern)
+- [File Organization](#file-organization)
 - [Development Workflow](#development-workflow)
 - [Security Considerations](#security-considerations)
 - [Troubleshooting](#troubleshooting)
@@ -57,6 +60,8 @@ Sahitya_Sangam2/
 │
 ├── 📁 includes/            # Backend processing files
 │   ├── config/
+│   │   ├── init.php        # 👈 Central bootstrap (load this!)
+│   │   ├── env.php         # Environment loader
 │   │   └── db.php          # Database configuration
 │   │
 │   ├── auth/               # Authentication handlers
@@ -224,13 +229,84 @@ MAIL_ENCRYPTION=tls
 
 📖 **Full Guide**: See [ENV_SETUP.md](ENV_SETUP.md) for complete email setup
 
+## Centralized Initialization Pattern
+
+This project uses a **single bootstrap file** for consistent initialization across all PHP scripts.
+
+### Using init.php
+
+Every PHP file should start with:
+
+```php
+<?php
+require_once __DIR__ . '/path/to/includes/config/init.php';
+
+// Now you have access to:
+// - $conn: Database connection
+// - env(): Environment variables
+// - $_SESSION: Session management
+// - Helper functions
+```
+
+### What init.php Provides
+
+| Feature | Description |
+|---------|-------------|
+| **Environment Variables** | Access via `env('VARIABLE_NAME', 'default')` |
+| **Database Connection** | Available as `$conn` global variable |
+| **Session Management** | Auto-started (web context only) |
+| **Helper Functions** | redirect(), sanitize(), is_logged_in(), etc. |
+
+### Path Examples
+
+```php
+// From root (index.php, login.php)
+require_once __DIR__ . '/includes/config/init.php';
+
+// From includes/auth/
+require_once __DIR__ . '/../config/init.php';
+
+// From database/
+require_once __DIR__ . '/../includes/config/init.php';
+```
+
+### Available Helper Functions
+
+```php
+// Redirects
+redirect('/login.php');
+
+// Messages (auto-cleared after retrieval)
+set_success('Order placed!');
+set_error('Invalid input.');
+$msg = get_success();
+
+// Authentication
+if (is_logged_in()) { ... }
+require_auth('/login.php');  // Redirect if not logged in
+
+// Sanitization
+$safe = sanitize($_POST['name']);
+echo e($userInput);  // XSS-safe output
+```
+
+🔧 **Full Documentation**: See [INIT_PATTERN.md](INIT_PATTERN.md) for complete guide
+
 ## File Organization
 
 ### Main Pages
 All user-facing pages are in the root directory for easy access.
 
 ### Includes Directory
-- **cEnvironment Variables**: All credentials stored in `.env` file
+- **config/init.php**: Central bootstrap file (use this!)
+- **config/env.php**: Environment variable loader
+- **config/db.php**: Database connection
+- **auth/**: Authentication handlers
+- **order/**: Order processing
+- **process/**: Form processors
+
+### Environment Variables
+All credentials stored in `.env` file
    - ✅ `.env` is gitignored (never committed)
    - ✅ Use `.env.example` as template
    - ✅ Never hardcode credentials in code
@@ -413,6 +489,9 @@ git push origin main
 
 ### Project Documentation
 - **[QUICKSTART.md](QUICKSTART.md)** - Get started in 5 minutes
+- **[INIT_PATTERN.md](INIT_PATTERN.md)** - Centralized initialization guide
+- **[ENV_SETUP.md](ENV_SETUP.md)** - Environment variable configuration
+- **[ENV_MIGRATION.md](ENV_MIGRATION.md)** - Migration to .env guide
 - **[database/MIGRATIONS.md](database/MIGRATIONS.md)** - Complete migration guide with examples
 - **[database/MIGRATION_SUMMARY.md](database/MIGRATION_SUMMARY.md)** - Quick migration reference
 

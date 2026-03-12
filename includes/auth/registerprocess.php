@@ -1,5 +1,5 @@
 <?php
-include "../config/db.php";
+require_once __DIR__ . '/../config/init.php';
 
 $name = $_POST['name'];
 $email = $_POST['email'];

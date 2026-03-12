@@ -5,7 +5,7 @@
  * Usage: php database/seed.php
  */
 
-require_once __DIR__ . '/../includes/config/db.php';
+require_once __DIR__ . '/../includes/config/init.php';
 
 class DatabaseSeeder {
     private $conn;
