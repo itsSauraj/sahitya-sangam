@@ -1,0 +1,85 @@
+# Python Virtual Environment
+.venv/
+venv/
+env/
+ENV/
+*.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+
+# PHPMailer (should be managed via Composer)
+PHPMailer-master/
+PHPMailer.zip
+
+# Composer dependencies
+vendor/
+composer.lock
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+.project
+.buildpath
+.settings/
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+*.db
+
+# Session files
+sessions/
+tmp/
+temp/
+
+# Upload directories (if any)
+uploads/
+upload/
+images/uploads/
+
+# Cache directories
+cache/
+*.cache
+
+# Backup files
+*.bak
+*.backup
+*.old
+*.orig
+
+# Package files
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Node modules (if using npm)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build files
+dist/
+build/
